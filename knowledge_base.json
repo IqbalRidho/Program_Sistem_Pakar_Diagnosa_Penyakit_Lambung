@@ -1,0 +1,86 @@
+{
+    "conditions": {
+        "G01": { "text": "Mual dan muntah", "cf_yes": 0.7 },
+        "G02": { "text": "Hilang nafsu makan", "cf_yes": 0.2 },
+        "G03": { "text": "Kesulitan menelan makanan", "cf_yes": 0.5 },
+        "G04": { "text": "Nyeri pada tulang dada", "cf_yes": 0.3 },
+        "G05": { "text": "Nyeri pada punggung", "cf_yes": 0.3 },
+        "G06": { "text": "Rasa pahit pada lidah", "cf_yes": 0.3 },
+        "G07": { "text": "Cepat merasa kenyang", "cf_yes": 0.3 },
+        "G08": { "text": "Perut kembung", "cf_yes": 0.2 },
+        "G09": { "text": "Perut terasa nyeri atau mulas", "cf_yes": 0.2 },
+        "G10": { "text": "Tinja berwarna hitam pekat saat buang air besar", "cf_yes": 0.3 },
+        "G11": { "text": "Gangguan pencernaan", "cf_yes": 0.3 },
+        "G12": { "text": "Muntah darah", "cf_yes": 0.4 },
+        "G13": { "text": "Sering bersendawa", "cf_yes": 0.3 },
+        "G14": { "text": "Penurunan berat badan tanpa sebab", "cf_yes": 0.3 },
+        "G15": { "text": "Kekurangan sel darah merah / Anemia", "cf_yes": 0.2 }
+    },
+
+    "facts": {
+        "F01": "Iritasi pada lambung"
+    },
+
+    "rules": [
+        {
+        "id": "R1",
+        "if": ["G01", "G03", "G04", "G05", "G06"],
+        "then": "P01",
+        "cf": 0.9
+        },
+        {
+        "id": "R2",
+        "if": ["G01", "G02", "G07", "G08", "G09", "G10", "G11"],
+        "then": "P02",
+        "cf": 0.9
+        },
+        {
+        "id": "R3",
+        "if": ["G01", "G02", "G07", "G08", "G09", "G10", "G12", "G13", "G14", "G15"],
+        "then": "P03",
+        "cf": 1.0
+        },  
+        {
+        "id": "R4",
+        "if": ["G01", "G03", "G04"],
+        "then": "P01",
+        "cf": 0.9
+        },
+        {
+        "id": "R5",
+        "if": ["G01", "G02", "G07", "G08", "G09"],
+        "then": "P02",
+        "cf": 0.9
+        },
+        {
+        "id": "R6",
+        "if": ["G01", "G02", "G07", "G08", "G09", "G10"],
+        "then": "P03",
+        "cf": 0.9
+        },
+        {
+        "id": "R7",
+        "if": ["G12", "G13", "G14", "G15"],
+        "then": "P03",
+        "cf": 0.8
+        },
+        {
+        "id": "R8",
+        "if": ["G01", "G08", "G09"],
+        "then": "F01",
+        "cf": 0.8
+        },
+        {
+        "id": "R9", 
+        "if": ["G01", "G02", "G07"],
+        "then": "P02",
+        "cf": 0.9
+        }
+    ],
+
+    "penyakit": {
+        "P01": "GERD (Gastroesophageal Reflux Disease)",
+        "P02": "Gastritis (Radang Lambung)",
+        "P03": "Kanker Lambung"
+    }
+}
